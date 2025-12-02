@@ -214,11 +214,37 @@ df_15 |>
 #### Question 16
 
 ```{r}
-# represent the nb of students who have the same nb of grades ?
+# represent the nb of students who have the same nb of grades
 
 df_15 |>
   ggplot(aes(x = nb_grades)) +
   geom_bar()
+```
+
+#### Question 17
+
+```{r}
+# study whether the number of grades per student depends on the group
+
+df_15 |>
+  ggplot(aes(x = nb_grades, fill = group)) +
+  geom_bar(position = "dodge")
+```
+
+#### Question 18
+
+```{r}
+df_15_with_sex <- students_grades_courses |>
+  filter(course == "Buddhist Philosophy and Meditation") |>
+  select(id, group, grade, sex) |>
+  summarise(nb_grades = n(), .by = c(id, group, sex))
+```
+
+```{r}
+df_15_with_sex |>
+  ggplot(aes(x = nb_grades, fill = group)) +
+  geom_bar(position = "dodge") +
+  facet_wrap(vars(sex))
 ```
 
 
