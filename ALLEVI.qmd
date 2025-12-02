@@ -311,9 +311,71 @@ df_23 <- students_grades_courses |>
   arrange(desc(final_grade))
 
 df_23 |>
-  slice_head(n=5)
+  slice_head(n=5) |>
+  knitr::kable()
 ```
 
+#### Question 24
 
+```{r}
+# final grades between groups
+
+df_23 |>
+  summarise(final_grade_groups = mean(final_grade), .by = group) |>
+  arrange(final_grade_groups) |>
+  slice_head(n = 5) |>
+  knitr::kable() 
+```
+
+```{r}
+# differences
+# finir plus tard
+
+```
+
+#### Question 26
+
+```{r}
+# passing conditions
+
+condition1 <- students_grades_courses |>
+  filter(!is.na(grade)) |>
+  summarise(avg_grade = mean(grade), .by = c(id, course)) |>
+  summarise(no_failing_course = all(avg_grade >= 5), .by = id)
+
+condition2 <- students_grades_courses |>
+  filter(!is.na(grade)) |>
+  summarise(avg_course = mean(grade), .by = c(id, course, module)) |>
+  summarise(avg_module = mean(avg_course), .by = c(id, module)) |>
+  summarise(passing_modules = all(avg_module >= 10), .by = id)
+
+pass <- condition1 |>
+  left_join(condition2, by = "id") |>
+  mutate(pass = no_failing_course & passing_modules) |>
+  select(id, pass)
+```
+
+```{r}
+# previous DF
+df_23 <- students_grades_courses |>
+  filter(!is.na(grade)) |>
+  summarise(avg_courses = mean(grade), .by = c(id, group, course, sex)) |>
+  summarise(final_grade = mean(avg_courses), .by = c(id, group, sex)) |>
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+```
+
+```{r}
+# joining
+
+pass <- left_join(df_23, pass, by = join_by(id))
+```
+
+#### Question 27 
+
+```{r}
+pass |>
+  
+```
 
 
