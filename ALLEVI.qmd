@@ -307,7 +307,11 @@ df_23 <- students_grades_courses |>
   filter(!is.na(grade)) |>
   summarise(avg_courses = mean(grade), .by = c(id, group, course, sex)) |>
   summarise(final_grade = mean(avg_courses), .by = c(id, group, sex)) |>
-  select(id, group, sex, final_grade)
+  select(id, group, sex, final_grade) |>
+  arrange(desc(final_grade))
+
+df_23 |>
+  slice_head(n=5)
 ```
 
 
