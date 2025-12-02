@@ -247,6 +247,21 @@ df_15_with_sex |>
   facet_wrap(vars(sex))
 ```
 
+## Grade analysis 
+
+#### Question 19
+
+```{r}
+# id, their group and the average of grades they obtained in each course, then pivot
+
+df_19 <- students_grades_courses |>
+  select(id, group, grade, course) |>
+  summarise(mean_grades = mean(grade), .by = c(id, course, group)) |>
+  arrange(id, course) |>
+  pivot_wider(names_from = course, values_from = mean_grades)
+
+df_19 |> slice_head(n= 10)
+```
 
 
 
