@@ -284,5 +284,23 @@ df_19 |>
 
 #### Question 22
 
+```{r}
+correlations <- df_19 |>
+  summarise(correlation = cor(`Spirituality and Rituals`, `Martial Arts and Self-Defense`), .by = group)
+
+# grades most correlated
+ most_correlated <- correlations |>
+   slice_max(abs(correlation)) # group 13
+```
+
+```{r}
+df_19 |>
+  filter(group == "13") |>
+  ggplot(aes(x = `Spirituality and Rituals`, y = `Martial Arts and Self-Defense`)) +
+  geom_point()
+```
+
+
+
 
 
