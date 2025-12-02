@@ -141,11 +141,54 @@ students |>
 
 #### Question 10
 
-```{r}
+The data set contains `{r} grades_clean |> filter(!is.na(grade)) |> nrow()` grades.
 
+#### Question 11
+
+```{r}
+# merging the databases grades, students and courses
+students_grades <- 
+  left_join(students, grades_clean, by = join_by(id))
+
+students_grades_courses <-
+  left_join(students_grades, courses, by = join_by(course_id))
 ```
 
-The data set contains `{r} ` grades.
+```{r}
+# average of all the grades in Language and Linguistics per group + graph (this as a function of the group)
+students_grades_courses |>
+  filter(course == "Language and Linguistics") |>
+  summarise(avg_grades = mean(grade, na.rm = TRUE), .by = group) |>
+  arrange(group) ## Weird values ???
+```
+
+#### Question 12
+
+Take all grades in a semester an compare the distribution of the grades to see if one module is simpler.
+
+```{r}
+students_grades_courses |>
+  filter(!is.na(grade)) |>
+  ggplot(aes(x = as.factor(module), y = grade)) +
+  geom_boxplot()
+```
+
+## Attendance analysis
+
+#### Question 13
+
+```{r}
+# number fo grade per student
+students_grades_courses |>
+  summarise(nb_grades = n(), .by = id)
+```
+
+#### Question 14 
+
+```{r}
+# distribution of the number of grades for female and male students
+
+```
 
 
 
