@@ -181,7 +181,8 @@ students_grades_courses |>
 # number fo grade per student
 students_grades_courses |>
   summarise(nb_grades = n(), .by = id) |>
-  slice_head(n = 5)
+  slice_head(n = 5) |>
+  knitr::kable()
 ```
 
 #### Question 14 
@@ -206,10 +207,19 @@ df_15 <- students_grades_courses |>
   summarise(nb_grades = n(), .by = c(id, group))
 
 df_15 |>
-  slice_head(n=5)
+  slice_head(n=5) |>
+  knitr::kable()
 ```
 
 #### Question 16
+
+```{r}
+# represent the nb of students who have the same nb of grades ?
+
+df_15 |>
+  ggplot(aes(x = nb_grades)) +
+  geom_bar()
+```
 
 
 
