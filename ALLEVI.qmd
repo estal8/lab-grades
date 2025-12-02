@@ -180,7 +180,8 @@ students_grades_courses |>
 ```{r}
 # number fo grade per student
 students_grades_courses |>
-  summarise(nb_grades = n(), .by = id)
+  summarise(nb_grades = n(), .by = id) |>
+  slice_head(n = 5)
 ```
 
 #### Question 14 
@@ -191,12 +192,24 @@ students_grades_courses |>
 students_grades_courses |>
   filter(!is.na(grade)) |>
   summarise(nb_grades = n(), .by = c(id, sex)) |>
-  ggplot(aes(x = nb_grades, fill = sex)) +
+  ggplot(aes(y = nb_grades, fill = sex)) +
   geom_bar()
-# scale integers
+# scale integers ????
 ```
 
 #### Question 15
+
+```{r}
+df_15 <- students_grades_courses |>
+  filter(course == "Buddhist Philosophy and Meditation") |>
+  select(id, group, grade) |>
+  summarise(nb_grades = n(), .by = c(id, group)) |>
+  slice_head(n=5)
+```
+
+#### Question 16
+
+
 
 
 
