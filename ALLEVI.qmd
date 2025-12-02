@@ -188,8 +188,15 @@ students_grades_courses |>
 ```{r}
 # distribution of the number of grades for female and male students
 
+students_grades_courses |>
+  filter(!is.na(grade)) |>
+  summarise(nb_grades = n(), .by = c(id, sex)) |>
+  ggplot(aes(x = nb_grades, fill = sex)) +
+  geom_bar()
+# scale integers
 ```
 
+#### Question 15
 
 
 
