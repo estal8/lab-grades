@@ -255,14 +255,23 @@ df_15_with_sex |>
 # id, their group and the average of grades they obtained in each course, then pivot
 
 df_19 <- students_grades_courses |>
+  filter(!is.na(grade)) |>
   select(id, group, grade, course) |>
-  summarise(mean_grades = mean(grade), .by = c(id, course, group)) |>
+  summarise(mean_grades = mean(grade), .by = c(id, course, group)) # |>
   arrange(id, course) |>
   pivot_wider(names_from = course, values_from = mean_grades)
 
-df_19 |> slice_head(n= 10)
+df_19 |>
+  slice_head(n= 10) |>
+  knitr::kable()
 ```
 
+#### Question 20
 
+```{r}
+df_19 |>
+  ggplot(aes(x = `Traditional Medicine and Herbalism`, y = `Buddhist Philosophy and Meditation`)) +
+  geom_point(alpha = 0.5)
+```
 
 
