@@ -203,7 +203,9 @@ students_grades_courses |>
 df_15 <- students_grades_courses |>
   filter(course == "Buddhist Philosophy and Meditation") |>
   select(id, group, grade) |>
-  summarise(nb_grades = n(), .by = c(id, group)) |>
+  summarise(nb_grades = n(), .by = c(id, group))
+
+df_15 |>
   slice_head(n=5)
 ```
 
