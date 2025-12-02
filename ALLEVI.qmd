@@ -67,6 +67,7 @@ students <- students |>
 
 ```{r}
 typeof(students$group) # checking
+class(students$birth_date)
 ```
 
 The `{r} "birth_date"` column of the `{r} "students"` data frame is of class `{r} class(students$birth_date)`.
@@ -102,6 +103,23 @@ students |>
     geom_col() 
 ```
 
+#### Question 7
 
+```{r}
+students |>
+  mutate(age = as.numeric(Sys.Date() - birth_date) / 365) |>
+  ggplot(aes(x = age)) +
+    geom_density(bw = "sj") +
+    geom_rug(alpha = 0.2) # or geom_histogram(binwidth = 1) ???
+```
+
+#### Question 8
+
+```{r}
+students |>
+  mutate(age = as.numeric(Sys.Date() - birth_date) / 365) |>
+  summarise(`Median age` = as.integer(median(age)), .by = group) |>
+  arrange(group)
+```
 
 
