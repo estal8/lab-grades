@@ -35,6 +35,47 @@ courses |>
   knitr::kable()
 ```
 
+## Students
+
+### Question 3
+
+```{r}
+students <- vroom("students.csv")
+```
+
+```{r}
+# Checking the types
+cols_type = cols(
+  id = col_double(),
+  group = col_double(),
+  birth_date = col_date(format = ""),
+  sex = col_character(),
+  .delim = ","
+)
+```
+
+```{r}
+students <- students |>
+  mutate(
+    id = as.integer(id),
+    group = as.factor(group),
+    sex = as.factor(sex)
+  )
+```
+
+```{r}
+typeof(students$group) # checking
+```
+
+The `{r} "birth_date"` column of the `{r} "students"` data frame is of class `{r} class(students$birth_date)`.
+
+**PROBLÈME RENDERING**
+
+## Grades
+
+```{r}
+grades <- vroom("grades.csv")
+```
 
 
 
