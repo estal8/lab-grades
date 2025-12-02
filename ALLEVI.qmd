@@ -20,7 +20,6 @@ library(readr)
 library(ggplot2)
 ```
 
-
 #### Question 1
 
 ```{r}
@@ -31,7 +30,7 @@ here::i_am("lab-grades.Rproj")
 courses <- vroom("courses.csv")
 ```
 
-#### Question 2 
+#### Question 2
 
 ```{r}
 courses |>
@@ -185,7 +184,7 @@ students_grades_courses |>
   knitr::kable()
 ```
 
-#### Question 14 
+#### Question 14
 
 ```{r}
 # distribution of the number of grades for female and male students
@@ -247,7 +246,7 @@ df_15_with_sex |>
   facet_wrap(vars(sex))
 ```
 
-## Grade analysis 
+## Grade analysis
 
 #### Question 19
 
@@ -273,5 +272,17 @@ df_19 |>
   ggplot(aes(x = `Traditional Medicine and Herbalism`, y = `Buddhist Philosophy and Meditation`)) +
   geom_point(alpha = 0.5)
 ```
+
+#### Question 21
+
+```{r}
+df_19 |>
+  summarise(correlation = cor(`Spirituality and Rituals`, `Martial Arts and Self-Defense`), .by = group) |>
+  arrange(group) |>
+  knitr::kable()
+```
+
+#### Question 22
+
 
 
