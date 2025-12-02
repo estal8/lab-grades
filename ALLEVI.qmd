@@ -71,7 +71,7 @@ typeof(students$group) # checking
 class(students$birth_date)
 ```
 
-The `{r} "birth_date"` column of the `{r} "students"` data frame is of class `{r} class(students$birth_date)`.
+The `{r} students |> "birth_date"` column of the `{r} "students"` data frame is of class `{r} class(students$birth_date)`.
 
 **PROBLÈME RENDERING**
 
@@ -377,5 +377,17 @@ pass <- left_join(df_23, pass, by = join_by(id))
 pass |>
   filter(pass == TRUE, final_grade >= 10)
 ```
+
+#### Question 28
+
+```{r}
+# pass rate per group 
+
+pass_rate_group <- pass |>
+  filter(pass == TRUE) |>
+  summarise(nb_pass = n())
+```
+
+
 
 
