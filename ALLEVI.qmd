@@ -256,7 +256,7 @@ df_15_with_sex |>
 df_19 <- students_grades_courses |>
   filter(!is.na(grade)) |>
   select(id, group, grade, course) |>
-  summarise(mean_grades = mean(grade), .by = c(id, course, group)) # |>
+  summarise(mean_grades = mean(grade), .by = c(id, course, group)) |>
   arrange(id, course) |>
   pivot_wider(names_from = course, values_from = mean_grades)
 
