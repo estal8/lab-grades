@@ -16,6 +16,9 @@ library(dplyr)
 library(tidyr)
 ```
 
+
+### Question 1
+
 ```{r}
 here::i_am("lab-grades.Rproj")
 ```
@@ -23,4 +26,16 @@ here::i_am("lab-grades.Rproj")
 ```{r}
 courses <- vroom("courses.csv")
 ```
+
+### Question 2 
+
+```{r}
+courses |>
+  rename(`course name` = course, "identifier" = course_id, `number of exams`= "nb_grades") |>
+  knitr::kable()
+```
+
+
+
+
 
