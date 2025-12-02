@@ -6,7 +6,7 @@ format: html
 
 ## Introduction
 
-## Study organisation
+### Study organisation
 
 ```{r}
 #|message : false
@@ -14,10 +14,12 @@ library(here)
 library(vroom)
 library(dplyr)
 library(tidyr)
+library(readr)
+library(ggplot2)
 ```
 
 
-### Question 1
+#### Question 1
 
 ```{r}
 here::i_am("lab-grades.Rproj")
@@ -27,7 +29,7 @@ here::i_am("lab-grades.Rproj")
 courses <- vroom("courses.csv")
 ```
 
-### Question 2 
+#### Question 2 
 
 ```{r}
 courses |>
@@ -35,9 +37,9 @@ courses |>
   knitr::kable()
 ```
 
-## Students
+### Students
 
-### Question 3
+#### Question 3
 
 ```{r}
 students <- vroom("students.csv")
@@ -71,10 +73,33 @@ The `{r} "birth_date"` column of the `{r} "students"` data frame is of class `{r
 
 **PROBLÈME RENDERING**
 
-## Grades
+### Grades
 
 ```{r}
-grades <- vroom("grades.csv")
+# Check, not sure if properly cleaned
+grades_clean <- read_delim(here("grades.csv"),
+  delim = ";",
+  na = "$")
+```
+
+## Student population analysis
+
+#### Question 5
+
+```{r}
+students |>
+  summarise(`Number of students per group` = n(), .by = group) |>
+  ggplot(aes(x = group, y = `Number of students per group`)) + 
+    geom_col() 
+```
+
+#### Question 6
+
+```{r}
+students |>
+    summarise(`Number of students per group` = n(), .by = c(group, sex)) |>
+  ggplot(aes(x = group, y = `Number of students per group`, fill = sex)) + 
+    geom_col() 
 ```
 
 
