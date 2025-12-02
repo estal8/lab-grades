@@ -4,3 +4,23 @@ author: "Esther Allevi"
 format: html
 ---
 
+## Introduction
+
+## Study organisation
+
+```{r}
+#|message : false
+library(here)
+library(vroom)
+library(dplyr)
+library(tidyr)
+```
+
+```{r}
+here::i_am("lab-grades.Rproj")
+```
+
+```{r}
+courses <- vroom("courses.csv")
+```
+
