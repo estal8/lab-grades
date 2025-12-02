@@ -122,4 +122,16 @@ students |>
   arrange(group)
 ```
 
+#### Question 9
+
+```{r}
+# id, sex and age of the oldest student per group
+students |>
+  mutate(age = as.numeric(Sys.Date() - birth_date) / 365) |>
+  arrange(desc(age)) |>
+  slice(1, .by = group) |>
+  select(id, group, sex) |>
+  arrange(group) |>
+  knitr::kable()
+```
 
