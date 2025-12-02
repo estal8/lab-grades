@@ -4,6 +4,8 @@ author: "Esther Allevi"
 format: html
 ---
 
+Here is the link to the github repository : https://github.com/estal8/lab-grades.git
+
 ## Introduction
 
 ### Study organisation
@@ -134,4 +136,17 @@ students |>
   arrange(group) |>
   knitr::kable()
 ```
+
+## Simple grade analysis
+
+#### Question 10
+
+```{r}
+
+```
+
+The data set contains `{r} ` grades.
+
+
+
 
